@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
     }
     
     if (pnum > k) {
-        pnum = k;  // Нельзя иметь больше потоков чем чисел для умножения
+        pnum = k;   // Нельзя иметь больше потоков чем чисел для умножения
     }
     
     printf("Computing %d! mod %d using %d threads\n", k, mod, pnum);

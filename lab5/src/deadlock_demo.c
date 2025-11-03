@@ -6,40 +6,32 @@
 pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mutex2 = PTHREAD_MUTEX_INITIALIZER;
 
-// Функция для потока 1 (захватывает mutex1, потом пытается захватить mutex2)
 void* thread1_function(void* arg) {
-    (void)arg; // Явно указываем что параметр не используется
     printf("Thread 1: Trying to lock mutex1...\n");
     pthread_mutex_lock(&mutex1);
     printf("Thread 1: Locked mutex1\n");
     
-    // Имитация работы
     sleep(1);
     printf("Thread 1: Trying to lock mutex2...\n");
     pthread_mutex_lock(&mutex2);  // DEADLOCK!
     printf("Thread 1: Locked mutex2\n");
     
-    // Критическая секция
     printf("Thread 1: Working with both mutexes\n");
     pthread_mutex_unlock(&mutex2);
     pthread_mutex_unlock(&mutex1);
     return NULL;
 }
 
-// Функция для потока 2 (захватывает mutex2, потом пытается захватить mutex1)
 void* thread2_function(void* arg) {
-    (void)arg; // Явно указываем что параметр не используется
     printf("Thread 2: Trying to lock mutex2...\n");
     pthread_mutex_lock(&mutex2);
     printf("Thread 2: Locked mutex2\n");
     
-    // Имитация работы
     sleep(1);
     printf("Thread 2: Trying to lock mutex1...\n");
     pthread_mutex_lock(&mutex1);  // DEADLOCK!
     printf("Thread 2: Locked mutex1\n");
     
-    // Критическая секция
     printf("Thread 2: Working with both mutexes\n");
     pthread_mutex_unlock(&mutex1);
     pthread_mutex_unlock(&mutex2);
@@ -64,7 +56,6 @@ int main() {
         return 1;
     }
     
-    // Даем потокам время на выполнение
     sleep(3);
     
     printf("\nDEADLOCK DETECTED!\n");
@@ -77,6 +68,5 @@ int main() {
     pthread_join(thread2, NULL);
     
     printf("This message will never be printed due to deadlock!\n");
-    
     return 0;
 }

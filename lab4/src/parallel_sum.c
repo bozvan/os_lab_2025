@@ -5,27 +5,8 @@
 #include <sys/time.h>
 #include <getopt.h>
 #include <pthread.h>
-#include "utils.h" 
-
-struct SumArgs {
-  int *array;
-  int begin;
-  int end;
-};
-
-int Sum(const struct SumArgs *args) {
-  int sum = 0;
-  for (int i = args->begin; i < args->end; i++) {
-    sum += args->array[i];
-  }
-  return sum;
-}
-
-// Функция потока
-void *ThreadSum(void *args) {
-  struct SumArgs *sum_args = (struct SumArgs *)args;
-  return (void *)(size_t)Sum(sum_args);
-}
+#include "utils.h"
+#include "sum.h"  
 
 int main(int argc, char **argv) {
   uint32_t threads_num = 0;

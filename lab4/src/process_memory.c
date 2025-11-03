@@ -17,7 +17,7 @@ char buffer1[25];
 
 int showit(char *p); /* Function prototype */
 
-int main() {  // Добавили возвращаемый тип int
+int main() { 
   int i = 0; /* Automatic variable */
 
   /* Printing addressing information */
@@ -35,11 +35,11 @@ int main() {  // Добавили возвращаемый тип int
   write(1, buffer1, strlen(buffer1) + 1); /* System call */
   showit(cptr);
 
-  return 0; // Добавили возврат значения
+  return 0;
 } /* end of main function */
 
 /* A function follows */
-int showit(char *p) {  // Исправили объявление функции
+int showit(char *p) {
   char *buffer2;
   SHW_ADR("buffer2", buffer2);
   
@@ -53,5 +53,5 @@ int showit(char *p) {  // Исправили объявление функции
     exit(1);
   }
   
-  return 0; // Добавили возврат значения
+  return 0;
 }
